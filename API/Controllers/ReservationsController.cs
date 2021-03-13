@@ -23,5 +23,15 @@ namespace API.Controllers
            return await Mediator.Send(new Details.Query{Id = id});
         }
 
+        [HttpPost]
+        public async Task<IActionResult> CreateReservation(Reservation reservation){
+            return Ok(await Mediator.Send(new Create.Command{Reservation = reservation}));
+        }
+
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateReservation(Guid id, Reservation reservation){
+            reservation.Id = id;
+            return Ok(await Mediator.Send(new Edit.Command{Reservation = reservation}));
+        }
     }
 }
