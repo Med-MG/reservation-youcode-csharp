@@ -33,5 +33,11 @@ namespace API.Controllers
             reservation.Id = id;
             return Ok(await Mediator.Send(new Edit.Command{Reservation = reservation}));
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteReservation(Guid id){
+           
+            return Ok(await Mediator.Send(new Delete.Command{Id = id}));
+        }
     }
 }
