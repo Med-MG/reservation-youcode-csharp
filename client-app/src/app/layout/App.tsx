@@ -1,7 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 import axios from 'axios';
-import { Header, List } from 'semantic-ui-react';
+import { Container, Header, List } from 'semantic-ui-react';
 import { Reservation } from '../models/Reservation';
+import NavBar from './NavBar';
+import ReservationDashboard from '../../features/reservations/dashboard/ReservationDashboard';
 
 function App() {
   const [Reservations, setReservations] = useState<Reservation[]>([]);
@@ -14,18 +16,13 @@ function App() {
   }, [])
 
   return (
-    <div >
-      <Header as='h2' icon='users' content='Reservations' />
-        <List>
-            {Reservations.map( reservation => 
-            <List.Item key={reservation.id} >
-              {reservation.title}
-            </List.Item>
-          )}
-        </List>
-
- 
-    </div>
+    <Fragment>
+        <NavBar/>
+       <Container style={{marginTop: '7em'}}>
+          <ReservationDashboard reservations={Reservations}/>
+       </Container>
+         
+    </Fragment>
   );
 }
 
