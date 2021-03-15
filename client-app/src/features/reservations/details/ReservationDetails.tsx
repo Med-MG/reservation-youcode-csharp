@@ -3,11 +3,18 @@ import { Reservation } from "../../../app/models/Reservation"
 
 interface Props{
     reservation: Reservation;
+    CancelSelectedReservation: () => void;
+    openForm: (id: string) => void;
 }
-const ReservationDetails = ({reservation}: Props) => {
+
+const getRandom = (min: number, max: number) => {
+  return Math.floor(Math.random() * (max - min) + min);
+} 
+
+const ReservationDetails = ({reservation, CancelSelectedReservation, openForm}: Props) => {
     return (
         <Card fluid>
-        <Image src='/assets/users/m2.jpg'/>
+        <Image src={`/assets/users/${getRandom(1, 7)}.jpg`} />
         <Card.Content>
           <Card.Header>{reservation.title}</Card.Header>
           <Card.Meta>
@@ -19,8 +26,8 @@ const ReservationDetails = ({reservation}: Props) => {
         </Card.Content>
         <Card.Content extra>
           <Button.Group widths='2'>
-              <Button basic color='blue' content='Edit' />
-              <Button basic color='grey' content='Cancel' />
+              <Button onClick={()=>{openForm(reservation.id)}} basic color='blue' content='Edit' />
+              <Button onClick={CancelSelectedReservation} basic color='grey' content='Cancel' />
           </Button.Group>
         </Card.Content>
       </Card>

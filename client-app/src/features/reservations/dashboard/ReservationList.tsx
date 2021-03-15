@@ -3,25 +3,19 @@ import { Reservation } from "../../../app/models/Reservation"
 
 interface Props{
     reservations : Reservation[];
+    selectReservation: (id: string) => void;
+    deleteReservation: (id: string) => void;
 }
 
 
-const ReservationList = ({reservations}: Props) => {
+const ReservationList = ({reservations, selectReservation, deleteReservation}: Props) => {
     return (
-        // <List>
-        //     {reservations.map( reservation => 
-        //     <List.Item key={reservation.id} >
-        //         {reservation.title}
-        //     </List.Item>
-        //     )}
-        // </List>
-
         <Segment>
             <ItemGroup divided>
                 {
                     reservations.map( res => 
                         
-                        <Item Key={res.id} >
+                        <Item key={res.id} >
                             <Item.Content>
                                 <Item.Header as='a' >{res.title}</Item.Header>
                                 <Item.Meta>{res.date}</Item.Meta>
@@ -29,7 +23,8 @@ const ReservationList = ({reservations}: Props) => {
                                     <div>{res.description}</div>
                                 </Item.Description>
                                 <Item.Extra>
-                                    <Button floated='right' content='View' color='blue'/>
+                                    <Button onClick={() => selectReservation(res.id)} floated='right' content='View' color='blue'/>
+                                    <Button onClick={() => deleteReservation(res.id)} floated='right' content='Delete' color='red'/>
                                     <Label basic content={res.reservationType}/>
                                 </Item.Extra>
                             </Item.Content>
