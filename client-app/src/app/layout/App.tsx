@@ -17,7 +17,12 @@ function App() {
     // })
 
     agent.Reservations.list().then(response => {
-      setReservations(response);
+      let Reservations : Reservation[] = [];
+      response.forEach(el => {
+        el.date = el.date.split('T')[0];
+        Reservations.push(el);
+      })
+      setReservations(Reservations);
     })
   }, [])
 
