@@ -39,7 +39,7 @@ const ReservationForm = ({closeForm, reservation: selectedReservation, createOrE
                     <label>Description</label>
                     <textarea  placeholder='Description' name='description' value={reservation.description} onChange={handleInputChange}  />
                 </Form.Field>
-                <Form.Input placeholder='Date' name='date' value={reservation.date} onChange={handleInputChange}  />
+                <Form.Input placeholder='Date' type='date' name='date' value={reservation.date} onChange={handleInputChange}  />
                 <Form.Input placeholder='Reservation Type' name='reservationType'  value={reservation.reservationType} onChange={handleInputChange}  />
                 <Button floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />

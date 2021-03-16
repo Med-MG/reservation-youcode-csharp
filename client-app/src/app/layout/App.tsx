@@ -1,19 +1,23 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import axios from 'axios';
 import { Container } from 'semantic-ui-react';
 import { Reservation } from '../models/Reservation';
 import NavBar from './NavBar';
 import ReservationDashboard from '../../features/reservations/dashboard/ReservationDashboard';
 import {v4 as uuid} from 'uuid';
+import agent from '../api/agent';
 function App() {
   const [Reservations, setReservations] = useState<Reservation[]>([])
   const [SelectedReservation, setSelectedReservation] = useState<Reservation | undefined>(undefined)
   const [editMode, setEditMode] = useState(false)
 
   useEffect(() => { 
-    axios.get<Reservation[]>("http://localhost:5000/api/Reservations").then(response => {
-      console.log(response.data)
-      setReservations(response.data)
+    // axios.get<Reservation[]>("http://localhost:5000/api/Reservations").then(response => {
+    //   console.log(response.data)
+    //   setReservations(response.data)
+    // })
+
+    agent.Reservations.list().then(response => {
+      setReservations(response);
     })
   }, [])
 
