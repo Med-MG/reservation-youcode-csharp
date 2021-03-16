@@ -5,10 +5,12 @@ import NavBar from './NavBar';
 import ReservationDashboard from '../../features/reservations/dashboard/ReservationDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
+import LoadingComponent from './LoadingComponent';
 function App() {
   const [Reservations, setReservations] = useState<Reservation[]>([])
   const [SelectedReservation, setSelectedReservation] = useState<Reservation | undefined>(undefined)
   const [editMode, setEditMode] = useState(false)
+  const [Loading, setLoading] = useState(true)
 
   useEffect(() => { 
     // axios.get<Reservation[]>("http://localhost:5000/api/Reservations").then(response => {
@@ -23,6 +25,7 @@ function App() {
         Reservations.push(el);
       })
       setReservations(Reservations);
+      setLoading(false)
     })
   }, [])
 
@@ -52,6 +55,8 @@ function App() {
   const handleDeleteReservation = (id: string) => {
       setReservations([...Reservations.filter(x => x.id !== id)])
   }
+
+  if(Loading) return <LoadingComponent content='Loading content'/>
 
   return (
     <Fragment>
