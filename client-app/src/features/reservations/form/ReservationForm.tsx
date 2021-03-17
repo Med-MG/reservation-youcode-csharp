@@ -6,9 +6,10 @@ interface Props{
     closeForm: () => void;
     reservation: Reservation | undefined;
     createOrEdit: (reservation: Reservation) =>void;
+    submitting: boolean;
 }
 
-const ReservationForm = ({closeForm, reservation: selectedReservation, createOrEdit}: Props) => {
+const ReservationForm = ({closeForm, reservation: selectedReservation, createOrEdit, submitting}: Props) => {
 
     const initialState = selectedReservation ?? {
         id: '',
@@ -41,7 +42,7 @@ const ReservationForm = ({closeForm, reservation: selectedReservation, createOrE
                 </Form.Field>
                 <Form.Input placeholder='Date' type='date' name='date' value={reservation.date} onChange={handleInputChange}  />
                 <Form.Input placeholder='Reservation Type' name='reservationType'  value={reservation.reservationType} onChange={handleInputChange}  />
-                <Button floated='right' positive type='submit' content='Submit' />
+                <Button  loading={submitting} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>

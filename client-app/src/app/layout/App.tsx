@@ -11,7 +11,7 @@ function App() {
   const [SelectedReservation, setSelectedReservation] = useState<Reservation | undefined>(undefined)
   const [editMode, setEditMode] = useState(false)
   const [Loading, setLoading] = useState(true)
-
+  const [submitting, setSubmitting] = useState(false)
   useEffect(() => { 
     // axios.get<Reservation[]>("http://localhost:5000/api/Reservations").then(response => {
     //   console.log(response.data)
@@ -47,9 +47,24 @@ function App() {
   }
 
   const handleCreateOrRditReservation = (reservation: Reservation) => {
-      reservation.id ? setReservations([...Reservations.filter(x => x.id !== reservation.id), reservation] ) : setReservations([...Reservations, {...reservation, id: uuid() }]);
-      setEditMode(false);
-      setSelectedReservation(reservation);
+    setSubmitting(true);
+    if(reservation.id){
+      agent.Reservations.update(reservation).then(() => {
+        setReservations([...Reservations.filter(x => x.id !== reservation.id), reservation])
+        setSelectedReservation(reservation);
+        setEditMode(false);
+        setSubmitting(false); 
+      })
+
+    } else {
+      reservation.id = uuid();
+      agent.Reservations.create(reservation).then(() => {
+        setReservations([...Reservations, reservation]);
+        setSelectedReservation(reservation);
+        setEditMode(false);
+        setSubmitting(false);
+      })
+    }
   }
 
   const handleDeleteReservation = (id: string) => {
@@ -72,6 +87,7 @@ function App() {
           closeForm={handleFormCLose}
           createOrEdit={handleCreateOrRditReservation}
           deleteReservation={handleDeleteReservation}
+          submitting={submitting}
           />
        </Container>
          

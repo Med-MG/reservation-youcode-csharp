@@ -14,9 +14,10 @@ interface Props {
     closeForm: () => void;
     createOrEdit: (reservation: Reservation) => void;
     deleteReservation: (id: string) => void;
+    submitting: boolean;
 }
 
-const ReservationDashboard = ({reservations, selectReservation, SelectedReservation, CancelSelectedReservation, editMode, openForm, closeForm, createOrEdit, deleteReservation}: Props) => {
+const ReservationDashboard = ({reservations, selectReservation, SelectedReservation, CancelSelectedReservation, editMode, openForm, closeForm, createOrEdit, deleteReservation, submitting}: Props) => {
     return (
        <Grid>
            <Grid.Column width="10">
@@ -32,7 +33,13 @@ const ReservationDashboard = ({reservations, selectReservation, SelectedReservat
                     
                 />
                }
-               { editMode && <ReservationForm  closeForm={closeForm} reservation={SelectedReservation} createOrEdit={createOrEdit} />  }
+               { editMode && 
+               <ReservationForm 
+                closeForm={closeForm} 
+                reservation={SelectedReservation} 
+                createOrEdit={createOrEdit}
+                submitting={submitting}
+                 />  }
                
            </Grid.Column>
        </Grid>

@@ -31,7 +31,12 @@ const requests = {
 }
 
 const Reservations = {
-    list: () => requests.get<Reservation[]>('/Reservations')
+    list: () => requests.get<Reservation[]>('/Reservations'),
+    details: (id: string) => requests.get<Reservation>(`/Reservations/${id}`),
+    create: (reservation: Reservation) => requests.post<void>('/Reservations', reservation),
+    update: (reservation: Reservation) => requests.put<void>(`/Reservations/${reservation.id}`, reservation),
+    delete: (id: string) => requests.del<void>(`/Reservations/${id}`)
+
 }
 
 const agent = {
