@@ -1,17 +1,23 @@
 import React, { Fragment, useEffect, useState } from 'react';
-import { Container } from 'semantic-ui-react';
+import { Button, Container } from 'semantic-ui-react';
 import { Reservation } from '../models/Reservation';
 import NavBar from './NavBar';
 import ReservationDashboard from '../../features/reservations/dashboard/ReservationDashboard';
 import {v4 as uuid} from 'uuid';
 import agent from '../api/agent';
 import LoadingComponent from './LoadingComponent';
+import { useStore } from '../stores/store';
+import { observer } from 'mobx-react-lite';
 function App() {
+  const {reservationStore} = useStore();
+
+
   const [Reservations, setReservations] = useState<Reservation[]>([])
   const [SelectedReservation, setSelectedReservation] = useState<Reservation | undefined>(undefined)
   const [editMode, setEditMode] = useState(false)
   const [Loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+
   useEffect(() => { 
     // axios.get<Reservation[]>("http://localhost:5000/api/Reservations").then(response => {
     //   console.log(response.data)
@@ -81,6 +87,8 @@ function App() {
     <Fragment>
         <NavBar openForm={handleFormOpen}/>
        <Container style={{marginTop: '7em'}}>
+          <h2>{reservationStore.title}</h2>
+          <Button content='add ew point' positive onClick={reservationStore.setTitle} />
           <ReservationDashboard 
           CancelSelectedReservation={handleCancelSelectReservation} 
           SelectedReservation={SelectedReservation} 
@@ -99,4 +107,4 @@ function App() {
   );
 }
 
-export default App;
+export default observer(App);
