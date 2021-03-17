@@ -21,7 +21,7 @@ const ReservationDashboard = ({reservations, selectReservation, SelectedReservat
     return (
        <Grid>
            <Grid.Column width="10">
-                <ReservationList deleteReservation={deleteReservation} selectReservation={selectReservation} reservations={reservations} />
+                <ReservationList submitting={submitting} deleteReservation={deleteReservation} selectReservation={selectReservation} reservations={reservations} />
            </Grid.Column>
            <Grid.Column width="6">
                {

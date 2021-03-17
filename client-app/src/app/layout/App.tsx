@@ -68,7 +68,11 @@ function App() {
   }
 
   const handleDeleteReservation = (id: string) => {
-      setReservations([...Reservations.filter(x => x.id !== id)])
+      setSubmitting(true);
+      agent.Reservations.delete(id).then(() => {
+        setReservations([...Reservations.filter(x => x.id !== id)])
+        setSubmitting(false);
+      })
   }
 
   if(Loading) return <LoadingComponent content='Loading content'/>

@@ -1,3 +1,4 @@
+import { SyntheticEvent, useState } from "react";
 import { Button, Item, ItemGroup, Label, Segment } from "semantic-ui-react"
 import { Reservation } from "../../../app/models/Reservation"
 
@@ -5,10 +6,20 @@ interface Props{
     reservations : Reservation[];
     selectReservation: (id: string) => void;
     deleteReservation: (id: string) => void;
+    submitting: boolean;
 }
 
 
-const ReservationList = ({reservations, selectReservation, deleteReservation}: Props) => {
+
+
+const ReservationList = ({reservations, selectReservation, deleteReservation, submitting}: Props) => {
+    const [target, setTarget] = useState('');
+
+    const handleReservationDelete = (e: SyntheticEvent<HTMLButtonElement>, id: string) => {
+        setTarget(id);
+        deleteReservation(id);
+    }
+
     return (
         <Segment>
             <ItemGroup divided>
@@ -24,7 +35,7 @@ const ReservationList = ({reservations, selectReservation, deleteReservation}: P
                                 </Item.Description>
                                 <Item.Extra>
                                     <Button onClick={() => selectReservation(res.id)} floated='right' content='View' color='blue'/>
-                                    <Button onClick={() => deleteReservation(res.id)} floated='right' content='Delete' color='red'/>
+                                    <Button  loading={submitting && target === res.id} onClick={(e) => handleReservationDelete(e, res.id)} floated='right' content='Delete' color='red'/>
                                     <Label basic content={res.reservationType}/>
                                 </Item.Extra>
                             </Item.Content>
