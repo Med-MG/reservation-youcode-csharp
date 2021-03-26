@@ -1,18 +1,13 @@
 import { observer } from "mobx-react-lite"
 import { ChangeEvent, useState } from "react"
 import { Button , Form, Segment } from "semantic-ui-react"
-import { Reservation } from "../../../app/models/Reservation"
 import { useStore } from "../../../app/stores/store"
 
-interface Props{
-    createOrEdit: (reservation: Reservation) =>void;
-    submitting: boolean;
-}
 
-const ReservationForm = ({createOrEdit, submitting}: Props) => {
+const ReservationForm = () => {
 
     const {reservationStore} = useStore();
-    const {selectedReservation, closeForm} = reservationStore;
+    const {selectedReservation, closeForm, createReservation, updateReservation, loading} = reservationStore;
 
     const initialState = selectedReservation ?? {
         id: '',
@@ -25,7 +20,7 @@ const ReservationForm = ({createOrEdit, submitting}: Props) => {
     const [reservation, setReservation] = useState(initialState)
 
     const handleSubmit = () => {
-        createOrEdit(reservation); 
+        reservation.id ? updateReservation(reservation) : createReservation(reservation);
     }
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -45,7 +40,7 @@ const ReservationForm = ({createOrEdit, submitting}: Props) => {
                 </Form.Field>
                 <Form.Input placeholder='Date' type='date' name='date' value={reservation.date} onChange={handleInputChange}  />
                 <Form.Input placeholder='Reservation Type' name='reservationType'  value={reservation.reservationType} onChange={handleInputChange}  />
-                <Button  loading={submitting} floated='right' positive type='submit' content='Submit' />
+                <Button  loading={loading} floated='right' positive type='submit' content='Submit' />
                 <Button onClick={closeForm} floated='right' type='button' content='Cancel' />
             </Form>
         </Segment>
