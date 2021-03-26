@@ -1,10 +1,11 @@
+import { observer } from 'mobx-react-lite';
 import { Button, Container, Menu } from 'semantic-ui-react'
+import { useStore } from '../stores/store'
 
-interface Props {
-    openForm: () => void;
-}
 
-const NavBar = ({openForm}: Props) => {
+
+const NavBar = () => {
+    const {reservationStore} = useStore();
     return (
        <Menu inverted fixed='top'>
           <Container>
@@ -14,11 +15,11 @@ const NavBar = ({openForm}: Props) => {
               </Menu.Item>
               <Menu.Item name="Reservations" />
               <Menu.Item>
-                  <Button onClick={openForm} positive content='Create Reservation'/>
+                  <Button onClick={() => reservationStore.openForm()} positive content='Create Reservation'/>
               </Menu.Item>
           </Container>
        </Menu>
     )
 }
 
-export default NavBar
+export default observer(NavBar)

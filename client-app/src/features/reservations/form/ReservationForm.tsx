@@ -1,15 +1,18 @@
+import { observer } from "mobx-react-lite"
 import { ChangeEvent, useState } from "react"
 import { Button , Form, Segment } from "semantic-ui-react"
 import { Reservation } from "../../../app/models/Reservation"
+import { useStore } from "../../../app/stores/store"
 
 interface Props{
-    closeForm: () => void;
-    reservation: Reservation | undefined;
     createOrEdit: (reservation: Reservation) =>void;
     submitting: boolean;
 }
 
-const ReservationForm = ({closeForm, reservation: selectedReservation, createOrEdit, submitting}: Props) => {
+const ReservationForm = ({createOrEdit, submitting}: Props) => {
+
+    const {reservationStore} = useStore();
+    const {selectedReservation, closeForm} = reservationStore;
 
     const initialState = selectedReservation ?? {
         id: '',
@@ -49,4 +52,4 @@ const ReservationForm = ({closeForm, reservation: selectedReservation, createOrE
     )
 }
     
-export default ReservationForm
+export default observer(ReservationForm) 

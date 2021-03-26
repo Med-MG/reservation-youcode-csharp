@@ -1,17 +1,18 @@
+import { observer } from "mobx-react-lite";
 import { Button, Card, Image } from "semantic-ui-react"
-import { Reservation } from "../../../app/models/Reservation"
+import LoadingComponent from "../../../app/layout/LoadingComponent";
+import { useStore } from "../../../app/stores/store";
 
-interface Props{
-    reservation: Reservation;
-    CancelSelectedReservation: () => void;
-    openForm: (id: string) => void;
-}
+
 
 const getRandom = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
 } 
 
-const ReservationDetails = ({reservation, CancelSelectedReservation, openForm}: Props) => {
+const ReservationDetails = () => {
+  const {reservationStore} = useStore();
+  const {selectedReservation : reservation} = reservationStore;
+  if(!reservation) return <LoadingComponent />;
     return (
         <Card fluid>
         <Image src={`/assets/users/${getRandom(1, 7)}.jpg`} />
@@ -26,12 +27,12 @@ const ReservationDetails = ({reservation, CancelSelectedReservation, openForm}: 
         </Card.Content>
         <Card.Content extra>
           <Button.Group widths='2'>
-              <Button onClick={()=>{openForm(reservation.id)}} basic color='blue' content='Edit' />
-              <Button onClick={CancelSelectedReservation} basic color='grey' content='Cancel' />
+              <Button onClick={()=>{reservationStore.openForm(reservation.id)}} basic color='blue' content='Edit' />
+              <Button onClick={reservationStore.cancelSelectedReservation} basic color='grey' content='Cancel' />
           </Button.Group>
         </Card.Content>
       </Card>
     )
 }
 
-export default ReservationDetails
+export default observer(ReservationDetails)

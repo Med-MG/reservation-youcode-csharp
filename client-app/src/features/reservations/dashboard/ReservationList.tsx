@@ -1,10 +1,11 @@
+import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
 import { Button, Item, ItemGroup, Label, Segment } from "semantic-ui-react"
 import { Reservation } from "../../../app/models/Reservation"
+import { useStore } from "../../../app/stores/store";
 
 interface Props{
     reservations : Reservation[];
-    selectReservation: (id: string) => void;
     deleteReservation: (id: string) => void;
     submitting: boolean;
 }
@@ -12,7 +13,10 @@ interface Props{
 
 
 
-const ReservationList = ({reservations, selectReservation, deleteReservation, submitting}: Props) => {
+const ReservationList = ({reservations, deleteReservation, submitting}: Props) => {
+
+    const {reservationStore} = useStore();
+
     const [target, setTarget] = useState('');
 
     const handleReservationDelete = (e: SyntheticEvent<HTMLButtonElement>, id: string) => {
@@ -34,7 +38,7 @@ const ReservationList = ({reservations, selectReservation, deleteReservation, su
                                     <div>{res.description}</div>
                                 </Item.Description>
                                 <Item.Extra>
-                                    <Button onClick={() => selectReservation(res.id)} floated='right' content='View' color='blue'/>
+                                    <Button onClick={() => reservationStore.selectReservation(res.id)} floated='right' content='View' color='blue'/>
                                     <Button  loading={submitting && target === res.id} onClick={(e) => handleReservationDelete(e, res.id)} floated='right' content='Delete' color='red'/>
                                     <Label basic content={res.reservationType}/>
                                 </Item.Extra>
@@ -48,4 +52,4 @@ const ReservationList = ({reservations, selectReservation, deleteReservation, su
     )
 }
 
-export default ReservationList
+export default observer(ReservationList) 
