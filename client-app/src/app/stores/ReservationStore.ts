@@ -1,12 +1,13 @@
-import { makeAutoObservable } from "mobx";
+import { makeAutoObservable, runInAction } from "mobx";
 import agent from "../api/agent";
 import { Reservation } from "../models/Reservation";
-
+import {v4 as uuid} from 'uuid';
 export default class ReservationStore {
     
     reservations: Reservation[] = [];
     selectedReservation: Reservation | undefined = undefined;
     editMode = false;
+    loading = false;
     loadingInitial = false;
 
     constructor() {
@@ -51,6 +52,45 @@ export default class ReservationStore {
 
     closeForm = () => {
         this.editMode = false;
+    }
+
+    createReservation = async (reservation: Reservation) => {
+            this.loading = true;
+            reservation.id = uuid();
+            try {
+                await agent.Reservations.create(reservation);
+                runInAction(() => {
+                    this.reservations.push(reservation);
+                    this.selectedReservation = reservation;
+                    this.editMode = false;
+                    this.loading = false;
+                })
+            } catch (error) {
+                console.log(error);
+                runInAction(() => {
+                    this.loading = false;
+                })
+            }
+    }
+
+    updateReservation = async (reservation : Reservation) => {
+        this.loading = true;
+
+        try {
+            await agent.Reservations.update(reservation);
+
+            runInAction(() => {
+                this.reservations = [...this.reservations.filter( res => res.id !== reservation.id), reservation];
+                this.selectedReservation = reservation;
+                this.editMode = false;
+                this.loading = false;
+            })
+        } catch (error) {
+                console.log(error);
+                runInAction(() => {
+                    this.loading = false
+                })
+        }
     }
 
  }
