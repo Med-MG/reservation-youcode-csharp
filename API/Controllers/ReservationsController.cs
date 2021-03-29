@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application.reservations;
 using Domain;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
@@ -16,6 +17,7 @@ namespace API.Controllers
         {
             return await Mediator.Send(new List.Query());
         }
+
 
         [HttpGet("{id}")] // Reservation/id
         public async Task<ActionResult<Reservation>> GetReservation(Guid id)

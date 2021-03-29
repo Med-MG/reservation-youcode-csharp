@@ -3,13 +3,43 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Domain;
+using Microsoft.AspNetCore.Identity;
 
 namespace Persistence
 {
     public class Seed
     {
-        public static async Task SeedData(DataContext context)
+        public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
+            if(!userManager.Users.Any()){
+                var users = new List<AppUser> {
+                    new AppUser{DisplayName = "Med", UserName = "Med", Email = "med@gmail.com", score = 5},
+                    new AppUser{DisplayName = "Nas", UserName = "ns", Email = "ns@gmail.com", score = 7},
+                    new AppUser{DisplayName = "Mlk", UserName = "Mlk", Email = "Mlik@gmail.com", score = 1},
+                    new AppUser{DisplayName = "said", UserName = "lm", Email = "said@gmail.com", score = 3},
+                    new AppUser{DisplayName = "Hassan", UserName = "hassan", Email = "Hs@gmail.com", score = 10},
+                    new AppUser{DisplayName = "Amal", UserName = "Amall", Email = "Lmm@gmail.com", score = 2},
+                };
+
+                foreach (var user in users)
+                {
+                    await userManager.CreateAsync(user, "Pa$$w0rd");
+                }
+            }
+
+            // if(!roleManager.Roles.Any()){
+
+            //     var Roles = new List<Roles>{
+            //         new Roles{roleName = "Admin"},
+            //         new Roles{roleName = "User"}
+            //     };
+            //     foreach (var role in Roles)
+            //     {
+            //         await roleManager.CreateAsync(role);
+            //     }
+                
+            // }
+
             if (context.Reservations.Any()) return;
             
             var Reservations = new List<Reservation>
