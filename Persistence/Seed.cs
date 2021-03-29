@@ -13,12 +13,12 @@ namespace Persistence
         {
             if(!userManager.Users.Any()){
                 var users = new List<AppUser> {
-                    new AppUser{DisplayName = "Med", UserName = "Med", Email = "med@gmail.com", score = 5},
-                    new AppUser{DisplayName = "Nas", UserName = "ns", Email = "ns@gmail.com", score = 7},
-                    new AppUser{DisplayName = "Mlk", UserName = "Mlk", Email = "Mlik@gmail.com", score = 1},
-                    new AppUser{DisplayName = "said", UserName = "lm", Email = "said@gmail.com", score = 3},
-                    new AppUser{DisplayName = "Hassan", UserName = "hassan", Email = "Hs@gmail.com", score = 10},
-                    new AppUser{DisplayName = "Amal", UserName = "Amall", Email = "Lmm@gmail.com", score = 2},
+                    new AppUser{DisplayName = "Med", UserName = "Med", Email = "med@gmail.com", score = 5, TempRole = "admin"},
+                    new AppUser{DisplayName = "Nas", UserName = "ns", Email = "ns@gmail.com", score = 7, TempRole = "user"},
+                    new AppUser{DisplayName = "Mlk", UserName = "Mlk", Email = "Mlik@gmail.com", score = 1, TempRole = "user"},
+                    new AppUser{DisplayName = "said", UserName = "lm", Email = "said@gmail.com", score = 3, TempRole = "user"},
+                    new AppUser{DisplayName = "Hassan", UserName = "hassan", Email = "Hs@gmail.com", score = 10, TempRole = "user"},
+                    new AppUser{DisplayName = "Amal", UserName = "Amall", Email = "Lmm@gmail.com", score = 2, TempRole = "user"},
                 };
 
                 foreach (var user in users)

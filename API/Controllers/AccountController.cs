@@ -89,6 +89,7 @@ namespace API.Controllers
             {
                 DisplayName = user.DisplayName,
                 Image = null,
+                TempRole = user.TempRole,
                 Token = _tokenService.CreateToken(user),
                 Username = user.UserName
             };
