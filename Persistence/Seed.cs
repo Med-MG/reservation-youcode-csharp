@@ -9,6 +9,11 @@ namespace Persistence
 {
     public class Seed
     {
+        public enum Roles
+        {
+            Admin,
+            BasicUser
+        }
         public static async Task SeedData(DataContext context, UserManager<AppUser> userManager)
         {
             if(!userManager.Users.Any()){
@@ -39,6 +44,8 @@ namespace Persistence
             //     }
                 
             // }
+            // await roleManager.CreateAsync(new IdentityRole(Roles.Admin.ToString()));
+            
 
             if (context.Reservations.Any()) return;
             

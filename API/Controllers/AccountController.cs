@@ -61,11 +61,14 @@ namespace API.Controllers
             {
                 DisplayName = registerDto.DisplayName,
                 Email = registerDto.Email,
-                UserName = registerDto.Username
+                UserName = registerDto.Username,
+                TempRole = "user"
             };
 
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+            // await _userManager.AddToRoleAsync(user, 'user');
+            
             if (result.Succeeded)
             {
                 return CreateUserObject(user);

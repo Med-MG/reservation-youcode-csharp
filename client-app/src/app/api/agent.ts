@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from 'axios';
 import { Reservation } from '../models/Reservation';
+import { User, UserFormValues } from '../models/user';
 
 
 const sleep = (delay: number) => {
@@ -39,8 +40,15 @@ const Reservations = {
 
 }
 
+const Account = {
+    current: () => requests.get<User>('/account'),
+    login: (user: UserFormValues) => requests.post<User>('/account/login', user),
+    register: (user: UserFormValues) => requests.post<User>('/account/register', user)
+}
+
 const agent = {
-    Reservations
+    Reservations,
+    Account
 }
 
 export default agent;

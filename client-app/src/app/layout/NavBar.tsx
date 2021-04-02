@@ -1,12 +1,14 @@
 import { observer } from 'mobx-react-lite';
-import { Button, Container, Menu } from 'semantic-ui-react'
+import { Button, Container, Dropdown, Image, Menu, MenuItem } from 'semantic-ui-react'
+import { Link  } from 'react-router-dom';
 import { useStore } from '../stores/store'
 import { NavLink } from 'react-router-dom';
 
 
 
 const NavBar = () => {
-    const {reservationStore} = useStore();
+    const {userStore: {user, logout} } = useStore();
+    
     return (
        <Menu inverted fixed='top'>
           <Container>
@@ -19,6 +21,17 @@ const NavBar = () => {
                   {/* <Button  onClick={() => reservationStore.openForm()} positive content='Create Reservation'/> */}
                   <Button as={NavLink} exact to='/CreateReservation' positive content='Create Reservation'/>
               </Menu.Item>
+
+              <MenuItem position='right'>
+                  <Image src={user?.image || '/assets/users/1.jpg'} avatar spaced='right' />
+                  <Dropdown pointing='top left' text={user?.displayName} >
+                      <Dropdown.Menu>
+                            <Dropdown.Item as={Link} to={`/profile/${user?.username}`} text='My profile' icon='user' />
+                            <Dropdown.Item onClick={logout} text='Logout' icon='power' />
+                      </Dropdown.Menu>
+
+                  </Dropdown>
+              </MenuItem>
           </Container>
        </Menu>
     )

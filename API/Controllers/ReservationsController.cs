@@ -12,7 +12,7 @@ namespace API.Controllers
     public class ReservationsController : BaseApiController
     {
 
-
+        
         [HttpGet]
         public async Task<ActionResult<List<Reservation>>> GetReservations()
         {

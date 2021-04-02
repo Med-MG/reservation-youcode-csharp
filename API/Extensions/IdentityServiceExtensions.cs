@@ -19,7 +19,8 @@ namespace API.Extensions
             })
             .AddEntityFrameworkStores<DataContext>()
             .AddSignInManager<SignInManager<AppUser>>();
-            // .AddRoles<Roles>();
+            // services.AddIdentity<AppUser, IdentityRole>();
+            
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
 
