@@ -1,6 +1,7 @@
 import axios, { AxiosResponse } from 'axios';
 import { Reservation } from '../models/Reservation';
 import { User, UserFormValues } from '../models/user';
+import { store } from '../stores/store';
 
 
 const sleep = (delay: number) => {
@@ -11,6 +12,12 @@ const sleep = (delay: number) => {
 
 axios.defaults.baseURL = 'http://localhost:5000/api';
 
+//this peace of code makes sure that we send our token with every request
+axios.interceptors.request.use(config => {
+    const token = store.commonStore.token;
+    if(token) config.headers.Authorization = `Bearer ${token}`
+    return config
+})
 
 axios.interceptors.response.use(async response => {
     try {
@@ -21,6 +28,8 @@ axios.interceptors.response.use(async response => {
         return await Promise.reject(error);
     }
 })
+
+
 
 const responseBody = <T> (response : AxiosResponse<T>) => response.data;
 

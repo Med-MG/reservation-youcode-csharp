@@ -8,9 +8,9 @@ import HomePage from '../../features/home/HomePage';
 import ReservationForm from '../../features/reservations/form/ReservationForm';
 import LoginForm from '../../features/users/LoginForm';
 import ModalContainer from '../common/modals/ModalContainer';
-import CommonStore from './../stores/CommonStore';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
+import PrivateRoute from './PrivateRoute';
 function App() {
   const {userStore, commonStore} = useStore();
 
@@ -41,7 +41,7 @@ function App() {
                   <Switch>
                       <Route exact path='/Login' component={LoginForm} />
                      
-                      <Route exact path='/reservations' component={ReservationDashboard} />
+                      <PrivateRoute exact path='/reservations' component={ReservationDashboard} />
                       <Route exact path='/CreateReservation' component={ReservationForm} />
                   </Switch>
 
