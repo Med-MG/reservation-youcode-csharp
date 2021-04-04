@@ -34,6 +34,9 @@ export default class CommonStore {
         this.admin = true;
     }
 
+    get isAdmin() {
+        return this.admin;
+    }
    
 
 }

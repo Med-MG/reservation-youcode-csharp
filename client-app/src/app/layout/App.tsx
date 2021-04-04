@@ -11,6 +11,7 @@ import ModalContainer from '../common/modals/ModalContainer';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
 import PrivateRoute from './PrivateRoute';
+import PrivateAdminRoute from './PrivateAdminRoute';
 function App() {
   const {userStore, commonStore} = useStore();
 
@@ -41,7 +42,8 @@ function App() {
                   <Switch>
                       <Route exact path='/Login' component={LoginForm} />
                      
-                      <PrivateRoute exact path='/reservations' component={ReservationDashboard} />
+                      {/* <PrivateRoute exact path='/reservations' component={ReservationDashboard} /> */}
+                      <PrivateAdminRoute exact path='/reservations' component={ReservationDashboard}/>
                       <Route exact path='/CreateReservation' component={ReservationForm} />
                   </Switch>
 
