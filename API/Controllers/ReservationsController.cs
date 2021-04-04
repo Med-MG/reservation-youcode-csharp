@@ -14,7 +14,7 @@ namespace API.Controllers
 
         
         [HttpGet]
-        public async Task<ActionResult<List<Reservation>>> GetReservations()
+        public async Task<ActionResult<List<ReservationDto>>> GetReservations()
         {
             return await Mediator.Send(new List.Query());
         }

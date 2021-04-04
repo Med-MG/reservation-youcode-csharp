@@ -1,3 +1,4 @@
+using Application.reservations;
 using AutoMapper;
 using Domain;
 
@@ -8,6 +9,8 @@ namespace Application.Core
         public MappingProfiles()
         {
             CreateMap<Reservation, Reservation>();
+            CreateMap<Reservation, ReservationDto>();
+            CreateMap<AppUser, Profiles.Profile>();
         }
     }
 }
