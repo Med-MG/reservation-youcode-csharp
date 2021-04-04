@@ -10,6 +10,6 @@ namespace Domain
         public string Description { get; set; }
         public string ReservationType { get; set; }
         public int status { get; set; }
-        public AppUser user { get; set; }
+        public AppUser user { get; set; } 
     }
 }

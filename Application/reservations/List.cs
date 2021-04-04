@@ -22,7 +22,7 @@ namespace Application.reservations
 
             public async Task<List<Reservation>> Handle(Query request, CancellationToken cancellationToken)
             {
-                return await _context.Reservations.ToListAsync();
+                return await _context.Reservations.Include(x => x.user).ToListAsync();
             }
         }
 
