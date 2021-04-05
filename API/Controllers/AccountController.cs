@@ -2,6 +2,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using API.DTOs;
 using API.Services;
+using AutoMapper;
 using Domain;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -18,8 +19,10 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly SignInManager<AppUser> _singnInManager;
         private readonly TokenService _tokenService;
-        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> singnInManager, TokenService tokenService)
+        private readonly IMapper _mapper;
+        public AccountController(UserManager<AppUser> userManager, SignInManager<AppUser> singnInManager, TokenService tokenService, IMapper mapper)
         {
+            _mapper = mapper;
             _tokenService = tokenService;
             _singnInManager = singnInManager;
             _userManager = userManager;
@@ -52,23 +55,25 @@ namespace API.Controllers
             {
                 return BadRequest("Email taken");
             }
-            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.Username))
+            if (await _userManager.Users.AnyAsync(x => x.UserName == registerDto.UserName))
             {
                 return BadRequest("Username taken");
             }
 
-            var user = new AppUser
-            {
-                DisplayName = registerDto.DisplayName,
-                Email = registerDto.Email,
-                UserName = registerDto.Username,
-                TempRole = "user"
-            };
-
+            var user = new AppUser(){};
+            // var user = new AppUser
+            // {
+            //     DisplayName = registerDto.DisplayName,
+            //     Email = registerDto.Email,
+            //     UserName = registerDto.Username,
+            //     TempRole = "user"
+            // };
+            _mapper.Map(registerDto, user);
+            user.TempRole = "user";
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             // await _userManager.AddToRoleAsync(user, 'user');
-            
+
             if (result.Succeeded)
             {
                 return CreateUserObject(user);

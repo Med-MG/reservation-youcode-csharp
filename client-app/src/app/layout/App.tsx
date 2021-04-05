@@ -10,8 +10,9 @@ import LoginForm from '../../features/users/LoginForm';
 import ModalContainer from '../common/modals/ModalContainer';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
-import PrivateRoute from './PrivateRoute';
+// import PrivateRoute from './PrivateRoute';
 import PrivateAdminRoute from './PrivateAdminRoute';
+import AccessRestriction from '../../features/security/AccessRestriction';
 function App() {
   const {userStore, commonStore} = useStore();
 
@@ -28,14 +29,9 @@ function App() {
 
   // if(reservationStore.loadingInitial) return <LoadingComponent content='Loading content'/>
 
-  return (
-    <Fragment>
-      <ModalContainer/>
-      <Route exact path='/' component={HomePage} />
-      <Route
-          path={'/(.+)'}
-          render={() => (
-            <>
+  const DefaultRoutes = () => {
+    return (
+      <>
               <NavBar />
               <Container style={{marginTop: '7em'}}>
                   {/* <ReservationDashboard  /> */}
@@ -46,12 +42,20 @@ function App() {
                       <PrivateAdminRoute exact path='/reservations' component={ReservationDashboard}/>
                       <Route exact path='/CreateReservation' component={ReservationForm} />
                   </Switch>
-
-                  
               </Container>
-            </>
-          )}
-       />
+     </>
+    )
+  }
+
+  return (
+    <Fragment>
+      <ModalContainer/>
+      <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route exact path='/RestrictedAccess' component={AccessRestriction} />
+        <Route component={DefaultRoutes} />
+      </Switch>
+      
 
          
     </Fragment>
