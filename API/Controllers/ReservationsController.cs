@@ -42,5 +42,10 @@ namespace API.Controllers
            
             return Ok(await Mediator.Send(new Delete.Command{Id = id}));
         }
+
+        [HttpGet("UserReservations")]
+        public async Task<ActionResult<List<ReservationDto>>> GetUserReservations() {
+                return await Mediator.Send(new UserResevationsList.Query());
+        }
     }
 }

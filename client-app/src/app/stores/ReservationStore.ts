@@ -50,7 +50,7 @@ export default class ReservationStore {
         resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status:'1'});
     }
 
-
+    //Load reservations for admin
     loadingReservations = async () => {
         // this.loadingInitial = true;
         // this.setLoadingInitial(true)
@@ -70,6 +70,11 @@ export default class ReservationStore {
             this.setLoadingInitial(false)
         }
     }
+
+
+    //Load only the users reservations
+    
+
 
     setLoadingInitial = (state: boolean) => {
         this.loadingInitial = state;
