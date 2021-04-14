@@ -7,7 +7,7 @@ import { useStore } from "../../../app/stores/store";
 
 const ReservationList = () => {
     const {reservationStore} = useStore();
-    const {reservationsByDate, deleteReservation, loading} = reservationStore;
+    const {FilteredReservation, deleteReservation, loading} = reservationStore;
 
     const [target, setTarget] = useState('');
 
@@ -20,10 +20,10 @@ const ReservationList = () => {
         <Segment>
             <ItemGroup divided>
                 {
-                    reservationsByDate.length > 0 ?
+                    FilteredReservation.length > 0 ?
                     
 
-                    reservationsByDate.map( res => 
+                    FilteredReservation.map( res => 
                         
                         <Item key={res.id} >
                             <Item.Content>

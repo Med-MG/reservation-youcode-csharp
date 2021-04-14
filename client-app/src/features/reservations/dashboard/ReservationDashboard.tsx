@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { Grid } from "semantic-ui-react"
 import LoadingComponent from "../../../app/layout/LoadingComponent";
 import { useStore } from "../../../app/stores/store";
+import FilterReservation from "../../filter/FilterReservation";
 import ReservationDetails from "../details/ReservationDetails";
 import ReservationForm from "../form/ReservationForm";
 import ReservationList from "./ReservationList";
@@ -23,6 +24,7 @@ const ReservationDashboard = () => {
                 <ReservationList />
             </Grid.Column>
            <Grid.Column width="6">
+               <FilterReservation />
                {
                 selectedReservation && !editMode && 
                 <ReservationDetails  />

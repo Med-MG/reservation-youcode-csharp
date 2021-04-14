@@ -2,8 +2,7 @@
 import { Button, Card, Image } from 'semantic-ui-react'
 import { useStore } from '../../../app/stores/store';
 import { observer } from 'mobx-react-lite';
-import { useState } from 'react';
-import { Reservation } from './../../../app/models/Reservation';
+
 
 const AdminReservationList = () => {
     const {reservationStore} = useStore();
