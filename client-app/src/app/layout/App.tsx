@@ -10,9 +10,11 @@ import LoginForm from '../../features/users/LoginForm';
 import ModalContainer from '../common/modals/ModalContainer';
 import { useStore } from '../stores/store';
 import LoadingComponent from './LoadingComponent';
-// import PrivateRoute from './PrivateRoute';
-import PrivateAdminRoute from './PrivateAdminRoute';
+import PrivateRoute from './PrivateRoute';
+// import PrivateAdminRoute from './PrivateAdminRoute';
 import AccessRestriction from '../../features/security/AccessRestriction';
+import PrivateAdminRoute from './PrivateAdminRoute';
+import AdminDashboard from './../../features/reservations/adminDashboard/AdminDashboard';
 function App() {
   const {userStore, commonStore} = useStore();
 
@@ -37,9 +39,9 @@ function App() {
                   {/* <ReservationDashboard  /> */}
                   <Switch>
                       <Route exact path='/Login' component={LoginForm} />
-                     
-                      {/* <PrivateRoute exact path='/reservations' component={ReservationDashboard} /> */}
-                      <PrivateAdminRoute exact path='/reservations' component={ReservationDashboard}/>
+                      <PrivateAdminRoute exact path='/adminRes' component={AdminDashboard} />
+                      <PrivateRoute exact path='/reservations' component={ReservationDashboard} />
+                      {/* <PrivateAdminRoute exact path='/reservations' component={ReservationDashboard}/> */}
                       <Route exact path='/CreateReservation' component={ReservationForm} />
                   </Switch>
               </Container>

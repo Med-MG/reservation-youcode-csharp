@@ -21,7 +21,7 @@ const ReservationDashboard = () => {
        <Grid>
            <Grid.Column width="10">
                 <ReservationList />
-           </Grid.Column>
+            </Grid.Column>
            <Grid.Column width="6">
                {
                 selectedReservation && !editMode && 

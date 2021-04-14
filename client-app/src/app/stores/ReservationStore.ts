@@ -10,14 +10,46 @@ export default class ReservationStore {
     editMode = false;
     loading = false;
     loadingInitial = true;
+    pendinApproval: string = '';
+    FilterMode: string = "pending";
 
     constructor() {
         makeAutoObservable(this)
     }
-
+    //Filter Reservations byDate
     get reservationsByDate() {
         return Array.from(this.reservationRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
     }
+    //Get Only Approved Reservations
+    get ApprovedReservations() {
+        // eslint-disable-next-line eqeqeq
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '1')];
+    }
+    get DeniedReservations() {
+        // eslint-disable-next-line eqeqeq
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '0')];
+    }
+    get PendingReservations() {
+        // eslint-disable-next-line eqeqeq
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '2')];
+    }
+
+    get FilteredReservation() {
+        if(this.FilterMode === "pending" ) return this.PendingReservations;
+        if(this.FilterMode === "approved" ) return this.ApprovedReservations;
+        if(this.FilterMode === "denied" ) return this.DeniedReservations;
+        return []
+    }
+
+    setFilterMode = (mode: string) => {
+        this.FilterMode = mode;
+    }
+
+    ApproveReservation = (id: string) => {
+        let resrvationedit = this.reservationRegistry.get(id);
+        resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status:'1'});
+    }
+
 
     loadingReservations = async () => {
         // this.loadingInitial = true;
@@ -120,5 +152,10 @@ export default class ReservationStore {
             })
         }
     }
+
+
+
+
+
 
  }

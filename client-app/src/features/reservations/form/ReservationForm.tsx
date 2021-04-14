@@ -15,6 +15,7 @@ const ReservationForm = () => {
         description:'',
         reservationType:'',
         date:'',
+        status:''
     }
 
     const [reservation, setReservation] = useState(initialState)
