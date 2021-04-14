@@ -48,9 +48,25 @@ export default class ReservationStore {
         this.FilterMode = mode;
     }
 
-    ApproveReservation = (id: string) => {
+    ApproveReservation  = async (id: string) => {
         let resrvationedit = this.reservationRegistry.get(id);
         resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status: 1});
+        
+        try {
+            await agent.Reservations.updateStatus({id: id,status: 1});
+        } catch (error) {
+            console.log(error);
+        }
+    }
+    DenyReservation  = async (id: string) => {
+        let resrvationedit = this.reservationRegistry.get(id);
+        resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status: 0});
+        
+        try {
+            await agent.Reservations.updateStatus({id: id,status: 0});
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     //Load reservations for admin

@@ -47,5 +47,12 @@ namespace API.Controllers
         public async Task<ActionResult<List<ReservationDto>>> GetUserReservations() {
                 return await Mediator.Send(new UserResevationsList.Query());
         }
+
+        [HttpPut("status/{id}")]
+        public async Task<IActionResult> UpdateStatus(Guid id, statusDto status){
+            status.Id = id;
+            return Ok(await Mediator.Send(new EditStatus.Command{Status = status}));
+        }
+
     }
 }

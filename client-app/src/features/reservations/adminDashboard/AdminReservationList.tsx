@@ -6,7 +6,7 @@ import { observer } from 'mobx-react-lite';
 
 const AdminReservationList = () => {
     const {reservationStore} = useStore();
-    const {FilteredReservation, ApproveReservation} = reservationStore;
+    const {FilteredReservation, ApproveReservation, DenyReservation} = reservationStore;
     
 
     const getRandom = (min: number, max: number) => {
@@ -38,8 +38,8 @@ const AdminReservationList = () => {
                 <Button onClick={()=> ApproveReservation(res.id)} basic color='green'>
                     Approve
                 </Button>
-                <Button basic color='red'>
-                    Cancel
+                <Button onClick={()=> DenyReservation(res.id)}  basic color='red'>
+                    Deny
                 </Button>
             </div>
             </Card.Content>

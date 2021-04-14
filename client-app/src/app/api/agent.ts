@@ -2,6 +2,7 @@ import axios, { AxiosResponse } from 'axios';
 import { Reservation } from '../models/Reservation';
 import { User, UserFormValues } from '../models/user';
 import { store } from '../stores/store';
+import { Status } from './../models/Status';
 
 
 const sleep = (delay: number) => {
@@ -46,6 +47,7 @@ const Reservations = {
     details: (id: string) => requests.get<Reservation>(`/Reservations/${id}`),
     create: (reservation: Reservation) => requests.post<void>('/Reservations', reservation),
     update: (reservation: Reservation) => requests.put<void>(`/Reservations/${reservation.id}`, reservation),
+    updateStatus: (status: Status) => requests.put<void>(`/Reservations/status/${status.id}`, status),
     delete: (id: string) => requests.del<void>(`/Reservations/${id}`)
 
 }
