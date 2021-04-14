@@ -1,3 +1,4 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 using Application.Interfaces;
@@ -33,6 +34,7 @@ namespace Application.reservations
                 
                 request.Reservation.user = user;
                 request.Reservation.status = 2;
+                request.Reservation.timestamp = DateTime.Now;
                 _context.Reservations.Add(request.Reservation);
 
                 await _context.SaveChangesAsync();

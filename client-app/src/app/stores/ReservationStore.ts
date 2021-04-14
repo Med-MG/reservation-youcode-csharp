@@ -148,7 +148,7 @@ export default class ReservationStore {
             runInAction(() => {
                 // this.reservations = [...this.reservations.filter( res => res.id !== reservation.id), reservation];
                 this.reservationRegistry.set(reservation.id, reservation);
-                this.selectedReservation = reservation;
+                this.cancelSelectedReservation();
                 this.editMode = false;
                 this.loading = false;
             })

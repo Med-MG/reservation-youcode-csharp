@@ -33,7 +33,8 @@ const ReservationList = () => {
                                     <div>{res.description}</div>
                                 </Item.Description>
                                 <Item.Extra>
-                                    <Button onClick={() => reservationStore.selectReservation(res.id)} floated='right' content='View' color='blue'/>
+                                    {/* <Button onClick={() => reservationStore.selectReservation(res.id)} floated='right' content='View' color='blue'/> */}
+                                    <Button onClick={()=>{reservationStore.openForm(res.id)}} floated='right' color='blue' content='Edit' />
                                     <Button  loading={loading && target === res.id} onClick={(e) => handleReservationDelete(e, res.id)} floated='right' content='Delete' color='red'/>
                                     <Label basic content={res.reservationType}/>
                                 </Item.Extra>
