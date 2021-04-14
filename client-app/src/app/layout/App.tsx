@@ -42,7 +42,7 @@ function App() {
                       <PrivateAdminRoute exact path='/adminRes' component={AdminDashboard} />
                       <PrivateRoute exact path='/reservations' component={ReservationDashboard} />
                       {/* <PrivateAdminRoute exact path='/reservations' component={ReservationDashboard}/> */}
-                      <Route exact path='/CreateReservation' component={ReservationForm} />
+                      {/* <Route exact path='/CreateReservation' component={ReservationForm} /> */}
                   </Switch>
               </Container>
      </>

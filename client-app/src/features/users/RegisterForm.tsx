@@ -26,7 +26,7 @@ const RegisterForm = () => {
             setError({status: false, header: '', content: ''})
         } catch (error) {
             console.log(error);
-            setError({status: true, header: 'Register failed' ,content: 'Incorrect username or password' })
+            setError({status: true, header: 'Register failed' ,content: 'Please try again later' })
             setIsSubmiting(false)
         }
         

@@ -32,6 +32,7 @@ namespace Application.reservations
                 var user = await _context.Users.FirstOrDefaultAsync(x => x.UserName == _userAccessor.GetUsername());
                 
                 request.Reservation.user = user;
+                request.Reservation.status = 2;
                 _context.Reservations.Add(request.Reservation);
 
                 await _context.SaveChangesAsync();

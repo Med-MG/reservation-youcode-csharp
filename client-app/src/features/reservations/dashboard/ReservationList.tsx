@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite";
 import { SyntheticEvent, useState } from "react";
-import { Button, Item, ItemGroup, Label, Segment } from "semantic-ui-react"
+import { Button, Header, Item, ItemGroup, Label, Segment } from "semantic-ui-react"
 import { useStore } from "../../../app/stores/store";
 
 
@@ -20,6 +20,9 @@ const ReservationList = () => {
         <Segment>
             <ItemGroup divided>
                 {
+                    reservationsByDate.length > 0 ?
+                    
+
                     reservationsByDate.map( res => 
                         
                         <Item key={res.id} >
@@ -38,6 +41,9 @@ const ReservationList = () => {
                         </Item>
 
                         )
+
+                        :
+                        <Header as='h3'>You don't have any reservation</Header>
                 }
             </ItemGroup>
         </Segment>

@@ -25,7 +25,11 @@ export default class UserStore {
                 user.tempRole === "admin" && store.commonStore.setAdmin();
             });
             
-            history.push('/Reservations');
+            if(user.tempRole === "admin") {
+                history.push('/adminRes');
+            } else {
+                history.push('/Reservations');
+            } 
             store.modalStore.closeModal();
             
         } catch (error) {
@@ -36,7 +40,9 @@ export default class UserStore {
 
     logout = () => {
         store.commonStore.setToken(null);
+        store.reservationStore.InitStates();
         window.localStorage.removeItem('jwt');
+
         this.user = null;
         history.push('/');
     }

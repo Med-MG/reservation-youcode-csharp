@@ -16,6 +16,9 @@ export default class ReservationStore {
     constructor() {
         makeAutoObservable(this)
     }
+
+
+
     //Filter Reservations byDate
     get reservationsByDate() {
         return Array.from(this.reservationRegistry.values()).sort((a, b) => Date.parse(a.date) - Date.parse(b.date));
@@ -23,15 +26,15 @@ export default class ReservationStore {
     //Get Only Approved Reservations
     get ApprovedReservations() {
         // eslint-disable-next-line eqeqeq
-        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '1')];
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == 1)];
     }
     get DeniedReservations() {
         // eslint-disable-next-line eqeqeq
-        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '0')];
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == 0)];
     }
     get PendingReservations() {
         // eslint-disable-next-line eqeqeq
-        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == '2')];
+        return [...Array.from(this.reservationRegistry.values()).filter(x => x.status == 2)];
     }
 
     get FilteredReservation() {
@@ -47,7 +50,7 @@ export default class ReservationStore {
 
     ApproveReservation = (id: string) => {
         let resrvationedit = this.reservationRegistry.get(id);
-        resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status:'1'});
+        resrvationedit && this.reservationRegistry.set(id, {...resrvationedit, status: 1});
     }
 
     //Load reservations for admin
@@ -73,7 +76,25 @@ export default class ReservationStore {
 
 
     //Load only the users reservations
-    
+    loadingUserReservations = async () => {
+        // this.loadingInitial = true;
+        // this.setLoadingInitial(true)
+        try {
+            const reservations = await agent.Reservations.listResUser();
+            reservations.forEach(el => {
+                el.date = el.date.split('T')[0];
+                // this.reservations.push(el);
+                this.reservationRegistry.set(el.id, el);
+              })
+            //   this.loadingInitial = false;
+            this.setLoadingInitial(false)
+
+        } catch (error) {
+            console.log(error);
+            // this.loadingInitial = false;
+            this.setLoadingInitial(false)
+        }
+    }
 
 
     setLoadingInitial = (state: boolean) => {
@@ -159,6 +180,15 @@ export default class ReservationStore {
     }
 
 
+    InitStates = () => {
+        this.reservationRegistry = new Map<string, Reservation>();
+        this.selectedReservation = undefined;
+        this.editMode = false;
+        this.loading = false;
+        this.loadingInitial = true;
+        this.pendinApproval = '';
+        this.FilterMode= "pending";
+    }
 
 
 

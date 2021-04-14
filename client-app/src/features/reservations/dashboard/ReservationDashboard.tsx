@@ -12,7 +12,7 @@ const ReservationDashboard = () => {
     const {selectedReservation, editMode} = reservationStore;
 
     useEffect(() => { 
-        reservationStore.loadingReservations();
+        reservationStore.loadingUserReservations();
     }, [reservationStore])
   
   

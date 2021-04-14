@@ -42,6 +42,7 @@ const requests = {
 
 const Reservations = {
     list: () => requests.get<Reservation[]>('/Reservations'),
+    listResUser: () => requests.get<Reservation[]>('/Reservations/UserReservations'),
     details: (id: string) => requests.get<Reservation>(`/Reservations/${id}`),
     create: (reservation: Reservation) => requests.post<void>('/Reservations', reservation),
     update: (reservation: Reservation) => requests.put<void>(`/Reservations/${reservation.id}`, reservation),

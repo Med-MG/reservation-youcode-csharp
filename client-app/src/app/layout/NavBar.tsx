@@ -7,7 +7,7 @@ import { NavLink } from 'react-router-dom';
 
 
 const NavBar = () => {
-    const {userStore: {user, logout} } = useStore();
+    const {userStore: {user, logout}, commonStore: {isAdmin},reservationStore } = useStore();
     
     return (
        <Menu inverted fixed='top'>
@@ -16,10 +16,18 @@ const NavBar = () => {
                     <img src="/assets/logo.png" alt="logo" style={{marginRight: '1rem'}} />
                     Reservation
               </Menu.Item>
-              <Menu.Item as={NavLink} to='/reservations' name="Reservations" />
+                {isAdmin ? 
+                    <>
+                        <Menu.Item as={NavLink} to='/adminRes' name="Reservations" /> 
+                        <Menu.Item as={NavLink} to='/Users' name="Users" /> 
+                    </>
+                    :
+                    <Menu.Item as={NavLink} to='/reservations' name="Reservations" />
+                }
+              
               <Menu.Item>
-                  {/* <Button  onClick={() => reservationStore.openForm()} positive content='Create Reservation'/> */}
-                  <Button as={NavLink} exact to='/CreateReservation' positive content='Create Reservation'/>
+                  <Button  onClick={() => reservationStore.openForm()} positive content='Create Reservation'/>
+                  {/* <Button as={NavLink} exact to='/CreateReservation' positive content='Create Reservation'/> */}
               </Menu.Item>
 
               <MenuItem position='right'>
