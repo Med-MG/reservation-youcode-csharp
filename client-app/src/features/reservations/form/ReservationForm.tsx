@@ -32,8 +32,8 @@ const ReservationForm = () => {
         <Segment clearing>
             <Form onSubmit={handleSubmit} autoComplete='off' >
                 <Form.Field>
-                    <label>Title</label>
-                    <input placeholder='Title' value={reservation.title} name='title' onChange={handleInputChange} />
+                    <label>Full Name</label>
+                    <input placeholder='Full Name' value={reservation.title} name='title' onChange={handleInputChange} />
                 </Form.Field>
                 <Form.Field>
                     <label>Description</label>

@@ -19,16 +19,19 @@ const NavBar = () => {
                 {isAdmin ? 
                     <>
                         <Menu.Item as={NavLink} to='/adminRes' name="Reservations" /> 
-                        <Menu.Item as={NavLink} to='/Users' name="Users" /> 
+                        {/* <Menu.Item as={NavLink} to='/Users' name="Users" />  */}
                     </>
                     :
-                    <Menu.Item as={NavLink} to='/reservations' name="Reservations" />
+                    <>
+                        <Menu.Item as={NavLink} to='/reservations' name="Reservations" />
+                        <Menu.Item>
+                            <Button  onClick={() => reservationStore.openForm()} positive content='Create Reservation'/>
+                            {/* <Button as={NavLink} exact to='/CreateReservation' positive content='Create Reservation'/> */}
+                        </Menu.Item>
+                    </>
                 }
               
-              <Menu.Item>
-                  <Button  onClick={() => reservationStore.openForm()} positive content='Create Reservation'/>
-                  {/* <Button as={NavLink} exact to='/CreateReservation' positive content='Create Reservation'/> */}
-              </Menu.Item>
+
 
               <MenuItem position='right'>
                   <Image src={user?.image || '/assets/users/1.jpg'} avatar spaced='right' />

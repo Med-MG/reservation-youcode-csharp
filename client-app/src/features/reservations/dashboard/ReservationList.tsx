@@ -32,12 +32,38 @@ const ReservationList = () => {
                                 <Item.Description>
                                     <div>{res.description}</div>
                                 </Item.Description>
-                                <Item.Extra>
+                                
+                                {
+                                // eslint-disable-next-line eqeqeq
+                                res.status == 2 &&                                
+                                 <Item.Extra>
                                     {/* <Button onClick={() => reservationStore.selectReservation(res.id)} floated='right' content='View' color='blue'/> */}
                                     <Button onClick={()=>{reservationStore.openForm(res.id)}} floated='right' color='blue' content='Edit' />
                                     <Button  loading={loading && target === res.id} onClick={(e) => handleReservationDelete(e, res.id)} floated='right' content='Delete' color='red'/>
                                     <Label basic content={res.reservationType}/>
                                 </Item.Extra>
+                                }
+                                {
+                                    // eslint-disable-next-line eqeqeq
+                                    res.status == 1 && 
+                                    <Item.Extra> 
+                                        <Label basic content={res.reservationType}/>
+                                        <Label as='a' color='teal' floated='right' tag>
+                                            Reservation Approved
+                                        </Label>
+                                    </Item.Extra>
+                                }
+                                {
+                                    // eslint-disable-next-line eqeqeq
+                                    res.status == 0 && 
+                                    <Item.Extra> 
+                                        <Label basic content={res.reservationType}/>
+                                        <Label as='a' color='red' floated='right' tag>
+                                            Reservation Denied
+                                        </Label>
+                                    </Item.Extra>
+                                }
+
                             </Item.Content>
                         </Item>
 
