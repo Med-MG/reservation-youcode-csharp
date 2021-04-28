@@ -5,7 +5,7 @@ import ReservationDashboard from '../../features/reservations/dashboard/Reservat
 import { observer } from 'mobx-react-lite';
 import { Route, Switch } from 'react-router-dom';
 import HomePage from '../../features/home/HomePage';
-import ReservationForm from '../../features/reservations/form/ReservationForm';
+// import ReservationForm from '../../features/reservations/form/ReservationForm';
 import LoginForm from '../../features/users/LoginForm';
 import ModalContainer from '../common/modals/ModalContainer';
 import { useStore } from '../stores/store';
