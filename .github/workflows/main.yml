@@ -43,4 +43,6 @@ jobs:
       - run: |
           heroku container:login
           heroku git:remote -a deployres
+          git fetch --all --unshallow
+          git add . && git commit -m 'update repo'
           git push heroku main --force
