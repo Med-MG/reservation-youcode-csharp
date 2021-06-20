@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers
 {
-[AllowAnonymous]
+    [AllowAnonymous]
     public class FallbackController : Controller
     {
         public IActionResult Index()
