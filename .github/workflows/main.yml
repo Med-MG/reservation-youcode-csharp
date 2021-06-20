@@ -39,4 +39,8 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "deployres" #Must be unique in Heroku
           heroku_email: "akilambbio@gmail.com"
-          # buildpack: "https://github.com/jincod/dotnetcore-buildpack"
+          justlogin: true
+        run: |
+          heroku container:login
+          git pull heroku main
+          git push heroku main
