@@ -42,5 +42,6 @@ jobs:
           justlogin: true
       - run: |
           heroku container:login
+          heroku git:remote -a deployres
           git pull heroku main
           git push heroku main
