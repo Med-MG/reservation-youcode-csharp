@@ -44,5 +44,5 @@ jobs:
           heroku container:login
           heroku git:remote -a deployres
           git fetch --all --unshallow
-          git add . && git commit -m 'update repo'
+          git config --global user.email "mohamedmouiguina7@gmail.com" && git config --global user.name "MOUIGUINA MOHAMED" && git add . && git commit -m 'update repo'
           git push heroku main --force
