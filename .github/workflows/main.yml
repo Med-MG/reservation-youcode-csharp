@@ -23,12 +23,12 @@ jobs:
       - name: Build
         run: dotnet build --configuration Release --no-restore
       - name: Test
-        run: dotnet test --no-restore --verbosity normal
-
+        run: dotnet test
       - name: Use Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+          appdir: "client-app"
       - run: npm run build --if-present
       - name: Deploy to heroku  
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
