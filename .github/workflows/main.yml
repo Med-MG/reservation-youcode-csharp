@@ -39,4 +39,4 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "reservationdepapp" #Must be unique in Heroku
           heroku_email: "akilambbio@gmail.com"
-          buildpack: "https://github.com/jincod/dotnetcore-buildpack"
+          # buildpack: "https://github.com/jincod/dotnetcore-buildpack"
