@@ -14,9 +14,7 @@ namespace ReservationTest
 {
     public class ReservationProjectTest
     {
-        private readonly ReservationsController _reservationCtr;
   
-
         [Fact]
         public async Task GetReservations_ShouldReturnReservation_WhenItExists()
         {
