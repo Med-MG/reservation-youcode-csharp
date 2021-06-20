@@ -33,6 +33,8 @@ jobs:
           cd client-app
           npm install
           npm run build
+      - name: Clean Commits before Deployment
+        run: git config user.email "mohamedmouiguina7@gmail.com" && git config user.name "MOUIGUINA MOHAMED" && git add -A && git commit -m "Updated code"
       - name: Deploy to heroku  
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
