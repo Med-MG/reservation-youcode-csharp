@@ -35,13 +35,12 @@ jobs:
           rm -rf ../API/wwwroot/*
           npm run build
       # - name: Commits before Deployment
-      #   run: git config user.email "mohamedmouiguina7@gmail.com" && git config user.name "MOUIGUINA MOHAMED" && git pull heroku main && git add -A && git commit -m "Updated code"
+      #   run: git config user.email "mohamedmouiguina7@gmail.com" && git config user.name "MOUIGUINA MOHAMED" && git add -A && git commit -m "Updated code"
 
       - name: Deploy to heroku  
-        run: git config user.email "mohamedmouiguina7@gmail.com" && git config user.name "MOUIGUINA MOHAMED" && git pull heroku main && git add -A && git commit -m "Updated code"
         uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
         with:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-          heroku_app_name: "reservationdepapp" #Must be unique in Heroku
+          heroku_app_name: "deployres" #Must be unique in Heroku
           heroku_email: "akilambbio@gmail.com"
           # buildpack: "https://github.com/jincod/dotnetcore-buildpack"
