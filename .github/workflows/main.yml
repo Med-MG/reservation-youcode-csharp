@@ -40,9 +40,9 @@ jobs:
           heroku_app_name: "deployres" #Must be unique in Heroku
           heroku_email: "akilambbio@gmail.com"
           justlogin: true
-      - run: |
-          heroku container:login
-          heroku git:remote -a deployres
-          git config --global user.email "mohamedmouiguina7@gmail.com" && git config --global user.name "MOUIGUINA MOHAMED" && git add . && git commit -m 'update repo'
-          git fetch --all --unshallow
-          git push heroku main --force
+      # - run: |
+      #     heroku container:login
+      #     heroku git:remote -a deployres
+      #     git config --global user.email "mohamedmouiguina7@gmail.com" && git config --global user.name "MOUIGUINA MOHAMED" && git add . && git commit -m 'update repo'
+      #     git fetch --all --unshallow
+      #     git push heroku main --force
